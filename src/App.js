@@ -11,14 +11,18 @@ import InfoSection from './components/InfoSection';
 import { InfoData, InfoDataTwo, InfoDataThree, InfoDataFour } from './data/InfoData';
 import ImageBackground from './images/Art-Background.jpg';
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 function App() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [offsetY, setOffsetY] = useState(0);
-	const handleScroll = () => setOffsetY(window.pageYOffset);
+	// const [offsetY, setOffsetY] = useState(0);
+	// const handleScroll = () => setOffsetY(window.pageYOffset);
 
 	// Might try to add parallax effect
 	useEffect(() => {
-		window.addEventListener('scroll', handleScroll);
+		// window.addEventListener('scroll', handleScroll);
+		AOS.init({ duration: 2000 });
 	}, []);
 
 	const toggle = () => {
@@ -45,10 +49,18 @@ function App() {
 				>
 					<Dropdown isOpen={isOpen} toggle={toggle} />
 					<MainSlider slides={SliderData} />
-					<InfoSection {...InfoData} />
-					<InfoSection {...InfoDataTwo} />
-					<InfoSection {...InfoDataThree} />
-					<InfoSection {...InfoDataFour} />
+					<div data-aos="fade-left">
+						<InfoSection {...InfoData} />
+					</div>
+					<div data-aos="fade-right">
+						<InfoSection {...InfoDataTwo} />
+					</div>
+					<div data-aos="fade-left">
+						<InfoSection {...InfoDataThree} />
+					</div>
+					<div data-aos="fade-right">
+						<InfoSection {...InfoDataFour} />
+					</div>
 				</div>
 			</Router>
 		</>
